@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block main %}
+<!-- Card -->
+<section>
+
+    <div class="container2">
+        <div class="row">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card transparent-card2">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img class="card-img-top" src="{{ url_for('static', filename='img/'+motorbike.image) }}" alt="Card image">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h2 class="card-title"><b>{{motorbike.name}}</b> <b class="text-dark"> - {{"$%.2f"|format(motorbike.price)}}</b></h2>
+                                    <p class="card-text3">
+                                        {{motorbike.description}}</p>
+                                    <form action="{{ url_for('main.order') }}" method="POST">
+                                        <input type="hidden" id="motorbike_id" name="motorbikes_id" value="{{ motorbike.id }}">
+                                        <input class="custom-button" type="submit" value="Add To Basket">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="card transparent-card2">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h1 class="card-title2"><b>Dimensions</b></h1>
+                                <p style="margin-left: 25px;">{{motorbike.dimension}}</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <img class="card-img-top" style="width: 50%;margin-left: 40px;" src="{{ url_for('static', filename='img/'+motorbike.image) }}" alt="Card image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+
+{% endblock %}

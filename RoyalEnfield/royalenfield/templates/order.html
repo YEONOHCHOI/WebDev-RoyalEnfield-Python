@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- display contents of user basket -->
+<section>  
+    <div class="container">
+        <div class="row co-12 d-flex mt-2 mb-2 text-white">
+            <h3>Shopping Basket</h3>
+        </div>
+        <!-- each motorbike on separate row -->
+        {% for motorbike in order.motorbike %}
+            <div class="row shadow-md my-row mb-3">
+                <div class="col-sm-10 card">
+                    <h5 class="card-header">{{ motorbike.date.strftime("%d/%m/%Y") }} : {{ motorbike.name }} - {{ "$%.2f"|format(motorbike.price) }}</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2">
+                                <img class="img-thumbnail" src="{{ url_for('static', filename=('img/' + motorbike.image)) }}">
+                            </div>
+                            <div class="col-10">
+                                <!-- Item Description -->
+                                <p class="card-text">{{ motorbike.description }}</p>   
+                            </div>  
+                        </div>                      
+                    </div>
+                </div>
+                <br><br>
+                <!-- right column has price and delete button -->
+                <div class="col-sm-2">
+                    <!-- delete item button 
+                        <h5>{{ "$%.2f"|format(motorbike.price) }}</h5>-->
+                        <form method="POST" action="{{url_for('main.deleteorderitem')}}">
+                            <input type="hidden" id="id" name="id" value="{{motorbike.id}}">
+                            <input type="submit" value="Delete" class="custom-button mb-3">
+                        </form> 
+                </div>
+            </div>
+        {% endfor %}
+        
+        <!-- total price and page controls -->
+        <section>
+            <div class="row co-12 d-flex">
+                <h5 class="mt-4">Quote = {{ "$%.2f"|format(total_price) }}</h5>
+            </div>
+        
+            <div class="row co-12 d-flex mt-2 mb-4">
+                <a href="{{ url_for('main.index', _anchor='motorbiketypes_anchor') }}" class="custom-button mr-4"><b>Products</b></a>
+                <a href="{{ url_for('main.checkout') }}" class="custom-button mr-4"><b>Checkout</b></a>
+                <a href="{{ url_for('main.deleteorder') }}" class="custom-button"><b>Empty Basket </b></a>
+                <h2 class="text-white" style="margin-left: 15px;">Total : {{ "$%.2f"|format(total_price) }}</h2>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}

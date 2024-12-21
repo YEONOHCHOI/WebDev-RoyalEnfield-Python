@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Royal Enfield</title>
+    <meta name="description" content="Royal Enfield">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- an example of using css alongside bootstrap -->
+
+</head>
+
+<body>
+    <!-- putting header inside container will prevent full width navbar -->
+
+    <header>
+
+        <!--navbar creates a navigation bar -->
+        <!-- Colours https://getbootstrap.com/docs/4.0/utilities/colors/ -->
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-black">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}"><b>Royal Enfield</b> </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url_for('main.index', _anchor='motorbike')}}">Products</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url_for('main.order')}}">Basket</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Special Price</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{{url_for('main.search')}}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %} 
+
+        {% block head %}
+        
+        {% endblock %}
+
+    </header>
+
+    <!-- main page content goes in container -->
+    <div class="container-fluid">
+        <main>
+            {% block main %}
+            
+            {% endblock %}
+        </main>
+    </div>
+    </br>
+    <div class="jumbotron">
+        <div class="container text-white">
+          <h1 class="display-3">Custom Shop</h1>
+          <p>We custom motorcycle parts and accessories supplier 
+          </br>for every make and model. 
+          </br>Industry leading experience and range of products.</p>
+          <p><a class="btn bg-light btn-lg" href="#" role="button">Create Your Custom Accesories &raquo;</a></p>
+        </div>
+      </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Text -->
+            <section class="mb-4">
+                <p>
+                    Explore the award-winning range of motorcycles from Royal Enfield,
+                    featuring an impressive lineup of models that cater to a variety of riding styles and
+                    preferences.
+                    Experience the classic design Royal Enfield is renowned for with the Classic 350, the sleek and
+                    modern design of the Meteor 350 cruiser,
+                    the versatile Scram, and the agile Hunter 350. Of course, the multi-award winning Twins
+                    (Interceptor 650 & Continental 650 GT),
+                    and adventure-ready Himalayan are also available from your nearest Royal Enfield dealer or can
+                    be ordered online. Discover the range today!
+                </p>
+            </section>
+            <!-- Section: Text -->
+
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="mx-auto">
+                        <h5 class="text-uppercase">Social media Links</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#!" class="text-white">Instagram</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Facebook</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Twitter</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Youtube</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            ©Copyright 2023 Royal Enfield Australia
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
